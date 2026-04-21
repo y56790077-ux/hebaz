@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday 🎉</title>
+  <title>Birthday Surprise 🎉</title>
 
   <style>
     body {
@@ -12,7 +12,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       background: black;
-      color: #fff;
+      color: white;
       overflow: hidden;
     }
 
@@ -27,24 +27,13 @@
       align-items: center;
       font-size: 2em;
       cursor: pointer;
-      z-index: 10;
       animation: pulse 1.5s infinite;
     }
 
-    /* نبض */
     @keyframes pulse {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.4;
-        transform: scale(1.1);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     /* المحتوى */
@@ -57,8 +46,8 @@
 
     .message {
       font-size: 2em;
-      animation: fadeIn 2s ease-in-out forwards;
       line-height: 1.6;
+      animation: fadeIn 2s ease-in-out forwards;
     }
 
     @keyframes fadeIn {
@@ -75,16 +64,18 @@
     }
 
     @keyframes fall {
-      to {
-        transform: translateY(100vh);
-      }
+      to { transform: translateY(100vh); }
+    }
+
+    iframe {
+      display: none;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- شاشة سودة -->
+  <!-- شاشة البداية -->
   <div id="intro" onclick="startSurprise()">
     Tap anywhere 💖
   </div>
@@ -94,26 +85,22 @@
     <div class="message" id="message"></div>
   </div>
 
-  <!-- فيديو مخفي لتشغيل الأغنية -->
-  <iframe id="ytPlayer"
-  width="0" height="0"
-  src=""
-  frameborder="0"
-  allow="autoplay">
-  </iframe>
+  <!-- يوتيوب للصوت -->
+  <iframe id="ytPlayer"></iframe>
 
   <script>
     function startSurprise() {
       document.getElementById("intro").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
 
+      // الرسالة
       document.getElementById("message").innerHTML = `
       ❤️ Happy Birthday my beautiful girl ❤️ <br><br>
       Wishing you all the happiness, love, and success in the world. <br><br>
       May all your dreams come true, Hebaz 🎂✨
       `;
 
-      // تشغيل الأغنية من 54 ثانية
+      // تشغيل الأغنية (من 54 ثانية)
       document.getElementById("ytPlayer").src =
         "https://www.youtube.com/embed/SOJpE1KMUbo?start=54&autoplay=1";
 
@@ -127,18 +114,16 @@
 
         confetti.style.left = Math.random() * 100 + "vw";
         confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.backgroundColor = randomColor();
 
         document.body.appendChild(confetti);
 
-        setTimeout(() => {
-          confetti.remove();
-        }, 5000);
+        setTimeout(() => confetti.remove(), 5000);
       }
     }
 
-    function getRandomColor() {
-      const colors = ["#ff6b81", "#feca57", "#48dbfb", "#1dd1a1", "#5f27cd"];
+    function randomColor() {
+      const colors = ["#ff6b81","#feca57","#48dbfb","#1dd1a1","#5f27cd"];
       return colors[Math.floor(Math.random() * colors.length)];
     }
   </script>
